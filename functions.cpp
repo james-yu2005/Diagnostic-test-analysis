@@ -1,160 +1,78 @@
-/*some basic operations for the class of doubly linked list*/
 #include <iostream>
+#include <cmath>
 using namespace std;
-typedef int DataType;
-
-struct Node {
-    DataType data;
-    Node *prev; // a pointer pointing to the previous node in the list
-    Node *next;
-    Node(int x) : data(x), prev(nullptr), next(nullptr) {};
-};
-
-class DoublyLinkedList{
-    Node *head = nullptr;
-    Node *tail = nullptr;   // a pointer pointing to the last node in the list
-    int size;//, omitted
-
-public:
-    void insert(DataType value, int position);
-    void replace(int position, DataType value);
-    void remove(int position);
-    Node* search(int target);// return a pointer to the target value
-    void print(); // print all elements in the list
-    void printReverse(); // print all elements in the list in reverse order
-    //overload destructor, omitted
-    //overload copy constructor, omitted
-    //overload assignment operator =, omitted
-
-};
-
-void DoublyLinkedList::insert(DataType value, int position) {
-    //step 1. check position validity, compare with 0 and size,
-    //if not valid, quit, report error, or force into a valid value
-    ////omitted in this demo, assuming it is valid
-   
-    //step 2. create new node
-    Node *newNode = new Node(value);
-
-    //step 3. if special case, when position = 0
-    //insert as the new head
-    //3.1 when head == nullptr, or size == 0
-    //the newNode will become the new head and the new tail
-    //3.2 when size > 0, (position = 0)
-    //insert at the head position
-    //// actual code omitted
-
-
-    //step 4. when size > 0, position = size
-    //insert at the end of the list, the node will become the new tail
-    //// actual code omitted
-
-    //step 5. when size > 0, position > 0,  position < size
-    //insert in the middle of the list
-    //iterate through the list to find the position
-    //with an additional pointer for the address of the previous node
-    //may iterate from head to tail, in a way same as in singly linked list
-    //may also iterate from tail to head.
-    //alternatively, in a slightly improved version, may check if position is closer to head or tail,
-    // then iterate from the closer end.
-    //// actual code omitted
-    Node *previous = head;
-    Node *current = head->next;
-
-
-    //step 6. insert the node between previous and current (assume previous is closer to head)
-    // properly link prev and next pointers
-    //// actual code omitted
-
-}
-
-void DoublyLinkedList::replace(int position, DataType value) {
-    //may iterate from head to tail, in a way same as in singly linked list
-    //may also iterate from tail to head.
-    //alternatively, in a slightly improved version, may check if position is closer to head or tail,
-    // then iterate from the closer end.
-
-    //step 1. check position validity, compare with 0 and size,
-    //if not valid, quit, report error, or force into a valid value
-    ////omitted in this demo, assuming it is valid
-
-    //step 2. iterate a pointer to the position
-    //// actual code omitted
-
-    //step 3. replace the value
-    //// actual code omitted
-
-}
-
-void DoublyLinkedList::remove(int position) {
-    //step 1. check position validity, compare with 0 and size,
-    //if not valid, quit, report error, or force into a valid value
-    ////omitted in this demo, assuming it is valid
-
-    //step 2.1 special case, if position == 0, remove head
-    //if this is also the tail, properly set tail pointer
-    //use a temp pointer
-    //properly set the pointers, don't forget setting head pointer
-    //deallocate node memory
-    //// actual code omitted
-
-
-    //step 2.2, special case, if position == size - 1, remove tail
-    //use a temp pointer
-    //properly set the pointers, don't forget setting tail pointer
-    //deallocate node memory
-    //// actual code omitted
-
-
-    //step 3. to prepare for removing a node in the middle of the list, find the pointer to the location
-    //may iterate from head to tail, in a way same as in singly linked list
-    //may also iterate from tail to head.
-    //alternatively, in a slightly improved version, may check if position is closer to head or tail,
-    // then iterate from the closer end.
-    //// actual code omitted
-
-    Node *previous = head;
-    Node *current = head->next;
-
-
-    //step 4. after finding the proper pointers after iteration
-    // remove the node and properly link the remaining nodes.
-    //// actual code omitted
-
-}
-Node* DoublyLinkedList::search(int target){
-    // use a boolian variable to check if target is found or not
-    // initially set it to false: bool found = false;
-    // you can start searching from head or tail: current = head // current == tail
-
-    // if target is found print a proper message and return a pointer to it.
-    // if target is not in the linkedlist print a proper message and return nullptr as result.
-}
-
-void DoublyLinkedList::print() {
-    if (head == nullptr) {
-        return;
+int main()
+{   
+    float TPR; // Assigning a float to TPR
+    float FPR;// Assigning a float to FPR
+    float Score;// Assigning a float to the Score
+    float BestScore=0; // Assigning a float to the Best Score
+    int testCount=1; // Declaring a variable to the test count
+    int BesttestCount; // Assigning an integer to the Best Test Count
+    while (true){ // Loop valid until the TPR and FPR aren't both negative
+    testCount=testCount; // Assigning the test count's value
+        while(true)// Loop until valid TPR is entered
+        {cout<< "Please enter the Diagnostic Test's True Positive Rate" << endl; // Asking user for a TPR value
+        cin >> TPR;
+        if (!cin.good()) //Statement will implement incase a string value is entered in place of a numeric value
+            {cout << "Warning: invalid input to True Positive Rate. Please enter a numeric input." << endl; // Display the warning incase a string value in entered
+            cin.clear(); // Clear the terminal
+            cin.ignore(100, '\n'); // Ignore the next characters in the terminal
+        }
+        else if (TPR>1) // Statement will implement incase a value greater than 1 is entered for the TPR
+        {
+            cout<< "Warning: invalid input to True Positive Rate. Please enter an input <=1." << endl;
+            cin.clear(); 
+            cin.ignore(100, '\n');
+        }
+         else if (TPR<0) //Statement will implement incase a value less than 0 is entered for the TPR
+        {
+            break;
+        }
+        else{ //Statement will implement for all other cases
+            break;
+        }
     }
-    //print all nodes
-    Node *temp = head;
-    while (temp != nullptr) {
-        cout<< temp->data << "->";
-        temp = temp->next;
+    while(true)// Loop until valid FPR is entered
+        {cout<< "Please enter the Diagnostic Test's False Positive Rate" << endl; // Asking user for an FPR value
+        cin >> FPR;
+        if (!cin.good()) //Statement will implement incase a string value is entered in place of a numeric value
+        {
+            cout << "Warning: invalid input to False Positive Rate. Please enter a numeric input." << endl; // Display the warning incase a string value in entered
+            cin.clear();
+            cin.ignore(100, '\n');
+        }
+        else if (FPR>1)// Statement will implement incase a value greater than 1 is entered for the FPR
+        {
+            cout<< "Warning: invalid input to False Positive Rate. Please enter an input <=1." << endl;
+            cin.clear();
+            cin.ignore(100, '\n');
+        }
+         else if (FPR<0)//Statement will implement incase a value less than 0 is entered for the TPR
+        {
+            break;
+        }
+        else{//Statement will implement for all other cases
+            break;
+        }
     }
-    cout<< endl;
+    if (TPR<0 && FPR<0){// Implementing the statement incase both TPR and FPR are less than 0
+    break;
+    }
+    Score= 1 - sqrt(pow(FPR, 2) + pow(1 - TPR, 2)); // Calculating the value of Accuracy Score
+    cout << "Diagnostic Accuracy Score for test "<< testCount<< " is " << Score << endl; // Displaying the value of the Accuracy Score
+    if(Score>BestScore) // Comparing the value of the currrent score with best score which is set to -1
+    { 
+        BestScore=Score; // Substituting the value of the Score in the Best Score
+        BesttestCount=testCount; // Substituing the value of Test Count in the best Test Count
+    }
+    testCount ++;   //increase the test count number by 1
+    }
+    if (TPR<0 && FPR<0) // Loop will work if both TPR and FPR arr negative
+    {
+        cout<< "Diagnostic Test " << BesttestCount << " has the best accuracy score of "<< BestScore <<endl; // Displaying the final statement
+        cout<< "Exiting the program"<< endl; // Displaying error statement
+    return 0;
+    }
+return 0;
 }
-
-void DoublyLinkedList::printReverse() {
-    if (tail == nullptr) {
-        return;
-    }
-    //print all nodes in reverse order
-    Node *temp = tail;
-    while (temp != nullptr) {
-        cout<< temp->data << "->";
-        temp = temp->prev;
-    }
-    cout<< endl;
-}
-
-
