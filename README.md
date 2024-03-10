@@ -1,1 +1,1 @@
-C++ program that sorts patient information stored in an external textfile according to user-input
+C++ program that analyzes true positive and true negative rate of data input
